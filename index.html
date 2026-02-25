@@ -7,28 +7,25 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
   <script src="https://cdn.jsdelivr.net/npm/papaparse@5"></script>
   <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18/dist/xlsx.full.min.js"></script>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css?v=5" />
 </head>
 <body>
 
   <div class="app">
-    <!-- Left: Data -->
     <div class="left-panel">
-      <div class="panel-title">
+      <div class="panel-bar">
         <h2>数据</h2>
-        <div class="upload-inline" id="dropZone">
-          <label for="fileInput" class="file-label">上传文件</label>
-          <span class="hint">(.csv / .xlsx)</span>
+        <div class="upload-wrap" id="dropZone">
+          <label for="fileInput" class="upload-btn">上传文件</label>
+          <span class="upload-hint">.csv / .xlsx</span>
           <input type="file" id="fileInput" accept=".csv,.xlsx,.xls" hidden />
         </div>
       </div>
-
       <div class="toolbar">
         <button id="addRowBtn" class="btn">+ 添加行</button>
         <button id="clearBtn" class="btn btn-muted">清空</button>
-        <span id="dataInfo" class="info-text"></span>
+        <span id="dataInfo" class="toolbar-info"></span>
       </div>
-
       <div class="table-scroll">
         <table>
           <thead>
@@ -45,23 +42,22 @@
       </div>
     </div>
 
-    <!-- Right: Chart -->
     <div class="right-panel">
-      <div class="panel-title">
+      <div class="panel-bar">
         <h2>可视化坐标图</h2>
         <div class="legend">
-          <span class="lg"><i class="dot green"></i>触发</span>
-          <span class="lg"><i class="dot red"></i>未触发</span>
-          <span class="lg"><i class="dot blue"></i>设备</span>
+          <span class="lg"><i class="dot clr-yes"></i>触发</span>
+          <span class="lg"><i class="dot clr-no"></i>未触发</span>
+          <span class="lg"><i class="dot clr-dev"></i>设备</span>
         </div>
       </div>
-      <div class="chart-area">
+      <div class="chart-box" id="chartBox">
         <canvas id="pirChart"></canvas>
-        <p class="empty-msg" id="emptyMsg">上传文件或手动添加数据</p>
+        <p class="placeholder" id="placeholder">上传文件或手动添加数据</p>
       </div>
     </div>
   </div>
 
-  <script src="app.js"></script>
+  <script src="app.js?v=5"></script>
 </body>
 </html>
