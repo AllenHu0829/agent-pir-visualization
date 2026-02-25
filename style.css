@@ -78,6 +78,8 @@ body {
 }
 .btn:hover { background: #eee; }
 .btn-muted { color: #999; }
+.btn-export { color: #4361ee; border-color: #c5d0ee; }
+.btn-export:hover { background: #eef1ff; }
 .toolbar-info { font-size: 0.78rem; color: #999; margin-left: auto; }
 
 /* ===== Table ===== */

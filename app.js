@@ -357,6 +357,64 @@
     window.addEventListener('resize', onResize);
   }
 
+  /* ======== Export PNG ======== */
+  document.getElementById('exportPngBtn').addEventListener('click', function () {
+    if (!rows.length) { alert('暂无数据可导出'); return; }
+
+    var dpr = window.devicePixelRatio || 1;
+    var w = canvas.width / dpr;
+    var h = canvas.height / dpr;
+
+    // Create a temp canvas with white background at export resolution
+    var expCanvas = document.createElement('canvas');
+    var expScale = 2; // export at 2x for crisp image
+    expCanvas.width = w * expScale;
+    expCanvas.height = h * expScale;
+    var expCtx = expCanvas.getContext('2d');
+    expCtx.scale(expScale, expScale);
+
+    // White background
+    expCtx.fillStyle = '#ffffff';
+    expCtx.fillRect(0, 0, w, h);
+
+    // Draw the current chart onto it (source is HiDPI canvas)
+    expCtx.drawImage(canvas, 0, 0, canvas.width, canvas.height, 0, 0, w, h);
+
+    // Trigger download
+    var link = document.createElement('a');
+    link.download = 'PIR_visualization_' + timestamp() + '.png';
+    link.href = expCanvas.toDataURL('image/png');
+    link.click();
+  });
+
+  /* ======== Export Excel ======== */
+  document.getElementById('exportExcelBtn').addEventListener('click', function () {
+    if (!rows.length) { alert('暂无数据可导出'); return; }
+
+    var data = [['#', '距离(m)', '角度(°)', '触发次数(/5)']];
+    for (var i = 0; i < rows.length; i++) {
+      data.push([i + 1, rows[i].distance, rows[i].angle, rows[i].count]);
+    }
+
+    var ws = XLSX.utils.aoa_to_sheet(data);
+
+    // Column widths
+    ws['!cols'] = [{ wch: 5 }, { wch: 10 }, { wch: 10 }, { wch: 14 }];
+
+    var wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'PIR数据');
+    XLSX.writeFile(wb, 'PIR_data_' + timestamp() + '.xlsx');
+  });
+
+  function timestamp() {
+    var d = new Date();
+    return d.getFullYear() +
+      ('0' + (d.getMonth() + 1)).slice(-2) +
+      ('0' + d.getDate()).slice(-2) + '_' +
+      ('0' + d.getHours()).slice(-2) +
+      ('0' + d.getMinutes()).slice(-2);
+  }
+
   /* ======== Init ======== */
   renderTable();
   drawChart();

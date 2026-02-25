@@ -6,7 +6,7 @@
   <title>PIR 可视化打点工具</title>
   <script src="https://cdn.jsdelivr.net/npm/papaparse@5"></script>
   <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18/dist/xlsx.full.min.js"></script>
-  <link rel="stylesheet" href="style.css?v=7" />
+  <link rel="stylesheet" href="style.css?v=8" />
 </head>
 <body>
 
@@ -23,6 +23,7 @@
       <div class="toolbar">
         <button id="addRowBtn" class="btn">+ 添加行</button>
         <button id="clearBtn" class="btn btn-muted">清空</button>
+        <button id="exportExcelBtn" class="btn btn-export">↓ Excel</button>
         <span id="dataInfo" class="toolbar-info"></span>
       </div>
       <div class="table-scroll">
@@ -44,6 +45,7 @@
     <div class="right-panel">
       <div class="panel-bar">
         <h2>可视化坐标图</h2>
+        <button id="exportPngBtn" class="btn btn-export">↓ PNG</button>
         <div class="legend" id="legend">
           <span class="lg"><i class="dot" style="background:#4A8FE7"></i>0次</span>
           <span class="lg"><i class="dot" style="background:#5CC5EF"></i>1次</span>
@@ -61,6 +63,6 @@
     </div>
   </div>
 
-  <script src="app.js?v=7"></script>
+  <script src="app.js?v=8"></script>
 </body>
 </html>
