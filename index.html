@@ -10,63 +10,57 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <header class="top-bar">
-    <h1>PIR 可视化打点工具</h1>
-    <p class="subtitle">上传或手动输入 PIR 测试数据，实时生成触发状态坐标图</p>
-  </header>
 
-  <main class="split-layout">
-    <!-- Left Panel: Data -->
-    <section class="panel panel-left">
-      <div class="upload-area" id="dropZone">
-        <span class="upload-icon">📁</span>
-        <span>拖拽文件或 <label for="fileInput" class="file-label">选择文件</label></span>
-        <span class="hint">.csv / .xlsx / .xls</span>
-        <input type="file" id="fileInput" accept=".csv,.xlsx,.xls" hidden />
-      </div>
-
-      <div class="data-section">
-        <div class="data-header">
-          <h2>数据表</h2>
-          <div class="data-actions">
-            <button id="addRowBtn" class="btn btn-sm" title="添加行">+ 添加行</button>
-            <button id="clearBtn" class="btn btn-sm btn-muted" title="清空数据">清空</button>
-          </div>
-        </div>
-        <p id="dataInfo" class="info"></p>
-        <div class="table-wrap">
-          <table id="dataTable">
-            <thead>
-              <tr>
-                <th class="col-idx">#</th>
-                <th>距离 (m)</th>
-                <th>角度 (°)</th>
-                <th>触发</th>
-                <th class="col-action"></th>
-              </tr>
-            </thead>
-            <tbody id="dataBody"></tbody>
-          </table>
+  <div class="app">
+    <!-- Left: Data -->
+    <div class="left-panel">
+      <div class="panel-title">
+        <h2>数据</h2>
+        <div class="upload-inline" id="dropZone">
+          <label for="fileInput" class="file-label">上传文件</label>
+          <span class="hint">(.csv / .xlsx)</span>
+          <input type="file" id="fileInput" accept=".csv,.xlsx,.xls" hidden />
         </div>
       </div>
-    </section>
 
-    <!-- Right Panel: Chart -->
-    <section class="panel panel-right">
-      <div class="chart-header">
+      <div class="toolbar">
+        <button id="addRowBtn" class="btn">+ 添加行</button>
+        <button id="clearBtn" class="btn btn-muted">清空</button>
+        <span id="dataInfo" class="info-text"></span>
+      </div>
+
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th style="width:36px">#</th>
+              <th>距离 (m)</th>
+              <th>角度 (°)</th>
+              <th style="width:70px">触发</th>
+              <th style="width:36px"></th>
+            </tr>
+          </thead>
+          <tbody id="dataBody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Right: Chart -->
+    <div class="right-panel">
+      <div class="panel-title">
         <h2>可视化坐标图</h2>
         <div class="legend">
-          <span class="legend-item"><span class="dot triggered"></span>触发</span>
-          <span class="legend-item"><span class="dot not-triggered"></span>未触发</span>
-          <span class="legend-item"><span class="dot device"></span>设备</span>
+          <span class="lg"><i class="dot green"></i>触发</span>
+          <span class="lg"><i class="dot red"></i>未触发</span>
+          <span class="lg"><i class="dot blue"></i>设备</span>
         </div>
       </div>
-      <div class="chart-container">
+      <div class="chart-area">
         <canvas id="pirChart"></canvas>
+        <p class="empty-msg" id="emptyMsg">上传文件或手动添加数据</p>
       </div>
-      <p class="chart-hint" id="chartHint">上传文件或手动添加数据后，坐标图将在此显示</p>
-    </section>
-  </main>
+    </div>
+  </div>
 
   <script src="app.js"></script>
 </body>
