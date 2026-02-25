@@ -10,37 +10,63 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="container">
+  <header class="top-bar">
     <h1>PIR 可视化打点工具</h1>
-    <p class="subtitle">上传 PIR 测试数据（CSV / Excel），自动生成触发状态可视化坐标图</p>
+    <p class="subtitle">上传或手动输入 PIR 测试数据，实时生成触发状态坐标图</p>
+  </header>
 
-    <div class="upload-area" id="dropZone">
-      <div class="upload-icon">📁</div>
-      <p>拖拽文件到此处，或 <label for="fileInput" class="file-label">点击选择文件</label></p>
-      <p class="hint">支持 .csv / .xlsx / .xls</p>
-      <input type="file" id="fileInput" accept=".csv,.xlsx,.xls" hidden />
-    </div>
-
-    <div id="previewSection" class="section" hidden>
-      <h2>数据预览</h2>
-      <div class="table-wrap">
-        <table id="previewTable"></table>
+  <main class="split-layout">
+    <!-- Left Panel: Data -->
+    <section class="panel panel-left">
+      <div class="upload-area" id="dropZone">
+        <span class="upload-icon">📁</span>
+        <span>拖拽文件或 <label for="fileInput" class="file-label">选择文件</label></span>
+        <span class="hint">.csv / .xlsx / .xls</span>
+        <input type="file" id="fileInput" accept=".csv,.xlsx,.xls" hidden />
       </div>
-      <p id="dataInfo" class="info"></p>
-    </div>
 
-    <div id="chartSection" class="section" hidden>
-      <h2>可视化坐标图</h2>
+      <div class="data-section">
+        <div class="data-header">
+          <h2>数据表</h2>
+          <div class="data-actions">
+            <button id="addRowBtn" class="btn btn-sm" title="添加行">+ 添加行</button>
+            <button id="clearBtn" class="btn btn-sm btn-muted" title="清空数据">清空</button>
+          </div>
+        </div>
+        <p id="dataInfo" class="info"></p>
+        <div class="table-wrap">
+          <table id="dataTable">
+            <thead>
+              <tr>
+                <th class="col-idx">#</th>
+                <th>距离 (m)</th>
+                <th>角度 (°)</th>
+                <th>触发</th>
+                <th class="col-action"></th>
+              </tr>
+            </thead>
+            <tbody id="dataBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- Right Panel: Chart -->
+    <section class="panel panel-right">
+      <div class="chart-header">
+        <h2>可视化坐标图</h2>
+        <div class="legend">
+          <span class="legend-item"><span class="dot triggered"></span>触发</span>
+          <span class="legend-item"><span class="dot not-triggered"></span>未触发</span>
+          <span class="legend-item"><span class="dot device"></span>设备</span>
+        </div>
+      </div>
       <div class="chart-container">
         <canvas id="pirChart"></canvas>
       </div>
-      <div class="legend">
-        <span class="legend-item"><span class="dot triggered"></span> 触发</span>
-        <span class="legend-item"><span class="dot not-triggered"></span> 未触发</span>
-        <span class="legend-item"><span class="dot device"></span> 设备（原点）</span>
-      </div>
-    </div>
-  </div>
+      <p class="chart-hint" id="chartHint">上传文件或手动添加数据后，坐标图将在此显示</p>
+    </section>
+  </main>
 
   <script src="app.js"></script>
 </body>
