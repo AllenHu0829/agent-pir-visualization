@@ -4,10 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>PIR 可视化打点工具</title>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
   <script src="https://cdn.jsdelivr.net/npm/papaparse@5"></script>
   <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18/dist/xlsx.full.min.js"></script>
-  <link rel="stylesheet" href="style.css?v=5" />
+  <link rel="stylesheet" href="style.css?v=7" />
 </head>
 <body>
 
@@ -30,11 +29,11 @@
         <table>
           <thead>
             <tr>
-              <th style="width:36px">#</th>
+              <th style="width:32px">#</th>
               <th>距离 (m)</th>
               <th>角度 (°)</th>
-              <th style="width:70px">触发</th>
-              <th style="width:36px"></th>
+              <th style="width:80px">触发次数</th>
+              <th style="width:32px"></th>
             </tr>
           </thead>
           <tbody id="dataBody"></tbody>
@@ -45,19 +44,23 @@
     <div class="right-panel">
       <div class="panel-bar">
         <h2>可视化坐标图</h2>
-        <div class="legend">
-          <span class="lg"><i class="dot clr-yes"></i>触发</span>
-          <span class="lg"><i class="dot clr-no"></i>未触发</span>
-          <span class="lg"><i class="dot clr-dev"></i>设备</span>
+        <div class="legend" id="legend">
+          <span class="lg"><i class="dot" style="background:#4A8FE7"></i>0次</span>
+          <span class="lg"><i class="dot" style="background:#5CC5EF"></i>1次</span>
+          <span class="lg"><i class="dot" style="background:#FFCC02"></i>2次</span>
+          <span class="lg"><i class="dot" style="background:#FF8C00"></i>3次</span>
+          <span class="lg"><i class="dot" style="background:#FF3B30"></i>4次</span>
+          <span class="lg"><i class="dot" style="background:#CC0000"></i>5次</span>
         </div>
       </div>
       <div class="chart-box" id="chartBox">
         <canvas id="pirChart"></canvas>
         <p class="placeholder" id="placeholder">上传文件或手动添加数据</p>
       </div>
+      <div class="tooltip" id="tooltip"></div>
     </div>
   </div>
 
-  <script src="app.js?v=5"></script>
+  <script src="app.js?v=7"></script>
 </body>
 </html>
