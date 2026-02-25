@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>PIR 可视化打点工具</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+  <script src="https://cdn.jsdelivr.net/npm/papaparse@5"></script>
+  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18/dist/xlsx.full.min.js"></script>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>PIR 可视化打点工具</h1>
+    <p class="subtitle">上传 PIR 测试数据（CSV / Excel），自动生成触发状态可视化坐标图</p>
+
+    <div class="upload-area" id="dropZone">
+      <div class="upload-icon">📁</div>
+      <p>拖拽文件到此处，或 <label for="fileInput" class="file-label">点击选择文件</label></p>
+      <p class="hint">支持 .csv / .xlsx / .xls</p>
+      <input type="file" id="fileInput" accept=".csv,.xlsx,.xls" hidden />
+    </div>
+
+    <div id="previewSection" class="section" hidden>
+      <h2>数据预览</h2>
+      <div class="table-wrap">
+        <table id="previewTable"></table>
+      </div>
+      <p id="dataInfo" class="info"></p>
+    </div>
+
+    <div id="chartSection" class="section" hidden>
+      <h2>可视化坐标图</h2>
+      <div class="chart-container">
+        <canvas id="pirChart"></canvas>
+      </div>
+      <div class="legend">
+        <span class="legend-item"><span class="dot triggered"></span> 触发</span>
+        <span class="legend-item"><span class="dot not-triggered"></span> 未触发</span>
+        <span class="legend-item"><span class="dot device"></span> 设备（原点）</span>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
