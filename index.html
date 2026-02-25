@@ -6,7 +6,7 @@
   <title>PIR 可视化打点工具</title>
   <script src="https://cdn.jsdelivr.net/npm/papaparse@5"></script>
   <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18/dist/xlsx.full.min.js"></script>
-  <link rel="stylesheet" href="style.css?v=8" />
+  <link rel="stylesheet" href="style.css?v=9" />
 </head>
 <body>
 
@@ -46,14 +46,7 @@
       <div class="panel-bar">
         <h2>可视化坐标图</h2>
         <button id="exportPngBtn" class="btn btn-export">↓ PNG</button>
-        <div class="legend" id="legend">
-          <span class="lg"><i class="dot" style="background:#4A8FE7"></i>0次</span>
-          <span class="lg"><i class="dot" style="background:#5CC5EF"></i>1次</span>
-          <span class="lg"><i class="dot" style="background:#FFCC02"></i>2次</span>
-          <span class="lg"><i class="dot" style="background:#FF8C00"></i>3次</span>
-          <span class="lg"><i class="dot" style="background:#FF3B30"></i>4次</span>
-          <span class="lg"><i class="dot" style="background:#CC0000"></i>5次</span>
-        </div>
+        <div class="legend" id="legend"></div>
       </div>
       <div class="chart-box" id="chartBox">
         <canvas id="pirChart"></canvas>
@@ -63,6 +56,6 @@
     </div>
   </div>
 
-  <script src="app.js?v=8"></script>
+  <script src="app.js?v=9"></script>
 </body>
 </html>

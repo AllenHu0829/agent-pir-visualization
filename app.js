@@ -16,8 +16,50 @@
   var rows = [];
   var chartCfg = null; // cached after draw for hover detection
 
-  /* ======== Colors for trigger levels 0-5 ======== */
-  var COLORS = ['#4A8FE7', '#5CC5EF', '#FFCC02', '#FF8C00', '#FF3B30', '#CC0000'];
+  /* ======== Colors for trigger levels 0-5 (customizable, persisted) ======== */
+  var DEFAULT_COLORS = ['#4A8FE7', '#5CC5EF', '#FFCC02', '#FF8C00', '#FF3B30', '#CC0000'];
+  var COLORS = loadColors();
+  var legendEl = document.getElementById('legend');
+
+  function loadColors() {
+    try {
+      var saved = localStorage.getItem('pir_colors');
+      if (saved) {
+        var arr = JSON.parse(saved);
+        if (arr && arr.length === 6) return arr;
+      }
+    } catch (e) {}
+    return DEFAULT_COLORS.slice();
+  }
+
+  function saveColors() {
+    try { localStorage.setItem('pir_colors', JSON.stringify(COLORS)); } catch (e) {}
+  }
+
+  function renderLegend() {
+    var html = '';
+    for (var c = 0; c <= 5; c++) {
+      html +=
+        '<span class="lg" title="点击修改颜色">' +
+        '<i class="dot" style="background:' + COLORS[c] + '" data-c="' + c + '"></i>' +
+        '<input type="color" value="' + COLORS[c] + '" data-c="' + c + '" />' +
+        c + '次</span>';
+    }
+    legendEl.innerHTML = html;
+  }
+
+  legendEl.addEventListener('input', function (e) {
+    if (e.target.type !== 'color') return;
+    var c = parseInt(e.target.getAttribute('data-c'), 10);
+    if (isNaN(c) || c < 0 || c > 5) return;
+    COLORS[c] = e.target.value;
+    e.target.previousElementSibling.style.background = e.target.value;
+    saveColors();
+    renderTable();
+    drawChart();
+  });
+
+  renderLegend();
 
   /* ======== File Upload ======== */
   dropZone.addEventListener('dragover', function (e) { e.preventDefault(); dropZone.classList.add('dragover'); });

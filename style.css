@@ -134,10 +134,22 @@ td select {
 tr:hover td { background: #fafcff; }
 .empty-row td { padding: 40px 0; color: #bbb; font-size: 0.88rem; }
 
-/* ===== Legend ===== */
+/* ===== Legend (clickable color pickers) ===== */
 .legend { display: flex; gap: 8px; flex-wrap: wrap; }
-.lg { display: flex; align-items: center; gap: 3px; font-size: 0.75rem; color: #555; }
-.dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+.lg { display: flex; align-items: center; gap: 3px; font-size: 0.75rem; color: #555; cursor: pointer; position: relative; }
+.lg:hover { opacity: 0.8; }
+.dot { width: 12px; height: 12px; border-radius: 50%; display: inline-block; border: 1.5px solid rgba(0,0,0,0.1); }
+.lg input[type="color"] {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 12px;
+  height: 12px;
+  opacity: 0;
+  cursor: pointer;
+  padding: 0;
+  border: none;
+}
 
 /* ===== Chart Box ===== */
 .chart-box {
